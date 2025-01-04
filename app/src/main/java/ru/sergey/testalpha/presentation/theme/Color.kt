@@ -1,4 +1,4 @@
-package ru.sergey.testalpha.ui.theme
+package ru.sergey.testalpha.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
