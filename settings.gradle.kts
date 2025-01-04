@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TestAlpha"
 include(":app")
- 
+include(":data")
