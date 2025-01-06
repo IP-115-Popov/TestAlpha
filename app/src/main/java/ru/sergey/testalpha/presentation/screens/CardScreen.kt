@@ -1,5 +1,7 @@
 package ru.sergey.testalpha.presentation.screens
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,21 +11,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.sergey.testalpha.presentation.viewmodel.MainViewModel
 
 @Composable
-fun CardScreen(mainViewModel: MainViewModel) {
+fun CardScreen(mainViewModel: MainViewModel, context: Context) {
     val state = mainViewModel.state.collectAsState()
 
     Column(
@@ -42,7 +49,11 @@ fun CardScreen(mainViewModel: MainViewModel) {
                 .fillMaxWidth()
                 .padding(8.dp)
                 .border(1.dp, Color.Gray),
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            )
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -80,3 +91,6 @@ fun CardScreen(mainViewModel: MainViewModel) {
         }
     }
 }
+
+
+

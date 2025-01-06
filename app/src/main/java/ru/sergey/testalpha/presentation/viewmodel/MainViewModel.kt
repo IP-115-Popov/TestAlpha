@@ -26,11 +26,15 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            historyRepository.getAll().onEach { history ->
-                _state.update {
-                    it.copy(history = history.map { SearchRecord.fromSearchRecordEntity(it) })
-                }
-            }.launchIn(viewModelScope)
+            try {
+                historyRepository.getAll().onEach { history ->
+                    _state.update {
+                        it.copy(history = history.map { SearchRecord.fromSearchRecordEntity(it) })
+                    }
+                }.launchIn(viewModelScope)
+            } catch (e: Exception) {
+                _state.update { it.copy(status = Status.Error(e)) }
+            }
         }
     }
 
@@ -45,14 +49,18 @@ class MainViewModel @Inject constructor(
             it.copy(status = Status.Loading)
         }
         viewModelScope.launch(Dispatchers.IO) {
-            val updatedBinInfo = binRepository.get(state.value.binNumber)
-            saveToHistory()
-            withContext(Dispatchers.Main) {
-                _state.update {
-                    it.copy(
-                        binInfo = updatedBinInfo, status = Status.Idle
-                    )
+            try {
+                val updatedBinInfo = binRepository.get(state.value.binNumber)
+                saveToHistory()
+                withContext(Dispatchers.Main) {
+                    _state.update {
+                        it.copy(
+                            binInfo = updatedBinInfo, status = Status.Idle
+                        )
+                    }
                 }
+            } catch (e: Exception) {
+                _state.update { it.copy(status = Status.Error(e)) }
             }
         }
     }

@@ -1,5 +1,6 @@
 package ru.sergey.testalpha.presentation
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,14 +39,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TestAlphaTheme {
-                Main(profileViewModel)
+                Main(profileViewModel, this)
             }
         }
     }
 }
 
 @Composable
-fun Main(mainViewModel: MainViewModel) {
+fun Main(mainViewModel: MainViewModel, context: Context) {
     val navController = rememberNavController()
     Column {
         NavHost(
@@ -54,7 +55,7 @@ fun Main(mainViewModel: MainViewModel) {
             modifier = Modifier.fillMaxHeight(0.87f)
         ) {
             composable(NavRoutes.CardScreen.route) {
-                CardScreen(mainViewModel)
+                CardScreen(mainViewModel, context = context)
             }
             composable(NavRoutes.HistoryScreen.route) {
                 HistoryScreen(mainViewModel, navController)
