@@ -56,7 +56,7 @@ fun Main(mainViewModel: MainViewModel) {
                 CardScreen(mainViewModel)
             }
             composable(NavRoutes.HistoryScreen.route) {
-                HistoryScreen(mainViewModel)
+                HistoryScreen(mainViewModel, navController)
             }
         }
 
