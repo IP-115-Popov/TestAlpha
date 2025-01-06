@@ -1,4 +1,6 @@
 package ru.sergey.data.models
 
-class NumberInfo {
-}
+data class NumberInfo(
+    val length: Int,
+    val luhn: Boolean
+)
