@@ -2,6 +2,7 @@ package ru.sergey.testalpha.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -10,8 +11,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.sergey.data.repository.BinRepository
+import javax.inject.Inject
 
-class MainViewModel(val binRepository: BinRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    val binRepository: BinRepository
+) : ViewModel() {
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
 
