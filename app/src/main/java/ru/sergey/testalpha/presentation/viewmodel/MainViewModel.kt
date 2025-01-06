@@ -18,7 +18,7 @@ class MainViewModel(val binRepository: BinRepository) : ViewModel() {
 
     fun setBinNumber(value: String) {
         _state.update {
-            it.copy(binNumber = value.toIntOrNull() ?: 0)
+            it.copy(binNumber = value.toLongOrNull() ?: 0L)
         }
     }
 
@@ -27,7 +27,7 @@ class MainViewModel(val binRepository: BinRepository) : ViewModel() {
             it.copy(status = Status.Loading)
         }
         viewModelScope.launch {
-            val updatedBinInfo = binRepository.get()
+            val updatedBinInfo = binRepository.get(state.value.binNumber)
             withContext(Dispatchers.Main){
                 _state.update {
                     it.copy(
