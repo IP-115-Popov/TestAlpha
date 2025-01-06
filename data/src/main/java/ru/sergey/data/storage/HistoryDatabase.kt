@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [SearchRecordEntity::class], version = 1
 )
-abstract class HistoryDatabase: RoomDatabase() {
+abstract class HistoryDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 
     companion object {

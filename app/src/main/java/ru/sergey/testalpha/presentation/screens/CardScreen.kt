@@ -59,7 +59,7 @@ fun CardScreen(mainViewModel: MainViewModel) {
 
         if (state.value.isRefreshing) {
             CircularProgressIndicator()
-        } else  {
+        } else {
             Column(horizontalAlignment = Alignment.Start) {
                 state.value.binInfo?.apply {
                     Text("Country: ${country.name}", fontSize = 18.sp)

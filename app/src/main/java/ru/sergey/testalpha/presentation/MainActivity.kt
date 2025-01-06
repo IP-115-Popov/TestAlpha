@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun Main(mainViewModel: MainViewModel) {
     val navController = rememberNavController()
@@ -98,9 +99,10 @@ object NavBarItems {
     val BarItems = listOf(
         BarItem(
             title = "TaskScreen", image = Icons.Filled.Home, route = NavRoutes.CardScreen.route
-        ),
-        BarItem(
-            title = "GraphScreen", image = Icons.Filled.DateRange, route = NavRoutes.HistoryScreen.route
+        ), BarItem(
+            title = "GraphScreen",
+            image = Icons.Filled.DateRange,
+            route = NavRoutes.HistoryScreen.route
         )
     )
 }

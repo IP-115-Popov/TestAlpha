@@ -54,13 +54,13 @@ fun HistoryScreen(mainViewModel: MainViewModel, navController: NavHostController
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier
+                            .padding(16.dp)
                             .fillMaxWidth()
                     )
                 }
             }
         }
-
     }
 }
 

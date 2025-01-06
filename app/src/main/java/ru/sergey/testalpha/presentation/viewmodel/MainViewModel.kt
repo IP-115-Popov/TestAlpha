@@ -19,15 +19,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    val binRepository: BinRepository,
-    val historyRepository: HistoryRepository
+    val binRepository: BinRepository, val historyRepository: HistoryRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            historyRepository.getAll().onEach {history->
+            historyRepository.getAll().onEach { history ->
                 _state.update {
                     it.copy(history = history.map { SearchRecord.fromSearchRecordEntity(it) })
                 }
@@ -48,11 +47,10 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val updatedBinInfo = binRepository.get(state.value.binNumber)
             saveToHistory()
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _state.update {
                     it.copy(
-                        binInfo = updatedBinInfo,
-                        status = Status.Idle
+                        binInfo = updatedBinInfo, status = Status.Idle
                     )
                 }
             }
@@ -60,6 +58,6 @@ class MainViewModel @Inject constructor(
     }
 
     private suspend fun saveToHistory() {
-            historyRepository.save(SearchRecord(binNumber =  state.value.binNumber).toSearchRecordEntity())
+        historyRepository.save(SearchRecord(binNumber = state.value.binNumber).toSearchRecordEntity())
     }
 }

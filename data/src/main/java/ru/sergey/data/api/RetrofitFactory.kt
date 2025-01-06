@@ -7,9 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitFactory {
 
     val INSTANCE by lazy {
-        Retrofit.Builder()
-            .baseUrl("https://lookup.binlist.net/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        Retrofit.Builder().baseUrl("https://lookup.binlist.net/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 }
